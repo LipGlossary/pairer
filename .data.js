@@ -3,12 +3,12 @@ var lones = [ "brendan", "dezarae", "jen", "kathy", "latisha", "latoya", "maria"
 
 var pair_matrix = {
   akbar     : [ 0, 3, 3, 4, 4, 5, 3, 3 ],
-  beatriz   : [ 3, 0, 3, 3, 3, 3, 3, 3 ],  // dummy
+  beatriz   : [ 4, 0, 2, 3, 4, 3, 2, 2 ],  // jiggered
   elizabeth : [ 5, 3, 0, 5, 3, 5, 3, 3 ],
   kevin     : [ 3, 1, 2, 0, 3, 3, 3, 3 ],
   lupe      : [ 5, 3, 4, 5, 0, 3, 2, 2 ],
   savance   : [ 3, 3, 3, 3, 3, 0, 3, 3 ],  // dummy
-  steph     : [ 5, 5, 5, 5, 5, 5, 0, 5 ],
+  steph     : [ 5, 5, 5, 5, 5, 5, 0, 3 ],  // jiggered
   tom       : [ 5, 2, 3, 5, 3, 2, 4, 0 ]
 };
 
@@ -26,11 +26,27 @@ var lone_matrix = {
   vic     : [ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0 ]   // dummy
 };
 
+// Normalize matrix
+var normalize = function ( list, matrix ) {
+  var normal = (list.length - 1) * 3;
+  for ( key in matrix ) {
+    var amp = 0;
+    for ( index in matrix[key] ) {
+      amp += matrix[key][index];
+    }
+    amp /= normal;
+    for ( index in matrix[key] ) {
+      matrix[key][index] = matrix[key][index] / amp;
+    }
+  }
+  return matrix;
+}
+
 module.exports = (function() {
   return { 
       pairs       : pairs
     , lones       : lones
-    , pair_matrix : pair_matrix
-    , lone_matrix : lone_matrix
+    , pair_matrix : normalize( pairs, pair_matrix )
+    , lone_matrix : normalize( lones, lone_matrix )
   };
 })();

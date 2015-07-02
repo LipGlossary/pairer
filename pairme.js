@@ -1,4 +1,4 @@
-var data = require('./data.js');
+var data = require('./.data.js');
 
 var pairs       = data.pairs;
 var lones       = data.lones;
@@ -6,8 +6,8 @@ var pair_matrix = data.pair_matrix;
 var lone_matrix = data.lone_matrix;
 
 // Current running environment
-var LIST   = lones;
-var MATRIX = lone_matrix;  // used as global
+var LIST   = pairs;
+var MATRIX = pair_matrix;  // used as global
 
 // Accepts two names
 var computeUtility = function ( n1, n2 ) {
@@ -70,7 +70,7 @@ Pair.prototype.prune = function () {
 };
 
 Pair.prototype.print = function ( depth ) {
-  console.log( depth, this.driver, '\t', this.navi, '\t', this.utility );
+  console.log( depth, this.driver, '\t', this.navi, '\t'/*, this.utility*/ );
   for ( index in this.next ) {
     this.next[index].print( depth + ' | ' );
   }
